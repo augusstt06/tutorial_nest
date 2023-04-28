@@ -34,4 +34,10 @@ export class BoardsService {
   getBoardById(id: string) {
     return this.boards.find((board) => board.id === id);
   }
+
+  // id값으로 게시물을 지우는 메서드
+  // 지우는것에 굳이 리턴을 줄 필요는 없어서 타입은 void
+  deleteBoard(id: string): void {
+    this.boards = this.boards.filter((board) => board.id !== id);
+  }
 }
