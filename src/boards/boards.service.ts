@@ -45,7 +45,10 @@ export class BoardsService {
   // id값으로 게시물을 지우는 메서드
   // 지우는것에 굳이 리턴을 줄 필요는 없어서 타입은 void
   deleteBoard(id: string): void {
-    this.boards = this.boards.filter((board) => board.id !== id);
+    // 없는 게시물을 지우려 할때는 getBoardById를 사용하여 먼저 게시물이 있는지 확인해준다.
+    // 게시물이 없다면 getBoardById 메서드 안에서 예외처리가 발생하고, 있다면 삭제가능
+    const found = this.getBoardById(id);
+    this.boards = this.boards.filter((board) => board.id !== found.id);
   }
 
   // 게시물 상태 업데이트 메서드
