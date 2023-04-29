@@ -6,6 +6,8 @@ import {
   Param,
   Patch,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { Board, BoardStatus } from './boards.model';
@@ -23,6 +25,8 @@ export class BoardsController {
   // 보드 하나를 리턴하기 때문에 타입을 Board로 선언
   // 생성한 dto를 사용한다.
   @Post()
+  // 유효성 검사를 위한 핸들러 레벨 파이프
+  @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto): Board {
     return this.boardsService.createBoard(createBoardDto);
   }
