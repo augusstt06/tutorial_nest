@@ -1,7 +1,7 @@
 // 개시물에 관한 로직을 처리하는 부분 => 이후 Controller에서 Service를 불러와서 사용한다.
 // Service => Controller
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Board, BoardStatus } from './boards.model';
 import { v1 as uuid } from 'uuid';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -32,7 +32,14 @@ export class BoardsService {
 
   // id값으로 게시물을 가져오는 메서드
   getBoardById(id: string) {
-    return this.boards.find((board) => board.id === id);
+    // id값 검색 결과가 없을때의 예외 처리
+    // 예외 인스턴스를 생성한다.
+    const found = this.boards.find((board) => board.id === id);
+    if (!found) {
+      // 에러메시지에 커스텀 메시지 전송하기
+      throw new NotFoundException(`Can't find Board id ${id}`);
+    }
+    return found;
   }
 
   // id값으로 게시물을 지우는 메서드
