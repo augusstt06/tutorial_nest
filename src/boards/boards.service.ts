@@ -12,7 +12,8 @@ import { Board } from './board.entitiy';
 @Injectable()
 export class BoardsService {
   constructor(
-    @InjectRepository(BoardRepository)
+    // @InjectRepository(BoardRepository)
+    // @InjectRepository(Board)
     private boardRepository: BoardRepository,
   ) {}
   // // boards.model.ts에서 생성한 모델을 타입으로 정의
@@ -33,8 +34,21 @@ export class BoardsService {
   //   this.boards.push(board);
   //   return board;
   // }
+  // 게시물 생성
+  // async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+  //   const { title, description } = createBoardDto;
+  //   const board = this.boardRepository.create({
+  //     title,
+  //     description,
+  //     status: BoardStatus.PUBLIC,
+  //   });
+  //   await this.boardRepository.save(board);
+  //   return board;
+  // }
+  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto);
+  }
   // // id값으로 게시물을 가져오는 메서드
-
   async getBoardById(id: number): Promise<Board> {
     const found = await this.boardRepository.findOneBy({ id });
 

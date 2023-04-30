@@ -33,6 +33,13 @@ export class BoardsController {
   //   return this.boardsService.createBoard(createBoardDto);
   // }
 
+  // 게시물 생성
+  @Post()
+  @UsePipes(ValidationPipe)
+  createBoard(@Body() CreateBoardDto: CreateBoardDto): Promise<Board> {
+    return this.boardsService.createBoard(CreateBoardDto);
+  }
+
   // // id값으로 게시물 가져오기
   // // 위에서 작성한 createBoard와 달리 url에서 데이터를 가져올때는 @Body 대신 @Param을 사용한다.
 
