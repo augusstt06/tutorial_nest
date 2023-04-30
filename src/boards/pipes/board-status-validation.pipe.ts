@@ -3,7 +3,7 @@ import {
   BadRequestException,
   PipeTransform,
 } from '@nestjs/common';
-import { BoardStatus } from '../boards.model';
+import { BoardStatus } from '../board-status.enum';
 
 // 게시글의 상태값은 PUBLIC, PRIVATE만 올 수 있기 때문에 이외의 값이 오면 에러가 발생 할 수 있게 유효성 검사 파이프를 커스텀 한다.
 export class BoardStatusValidationPipe implements PipeTransform {
